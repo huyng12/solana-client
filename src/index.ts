@@ -2,7 +2,7 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generateWallet } from "./cmd/wallet";
-import { fetchAccount } from "./cmd/account";
+import { getBalance } from "./cmd/balance";
 
 yargs(hideBin(process.argv))
 	.command(
@@ -19,8 +19,8 @@ yargs(hideBin(process.argv))
 		(argv) => generateWallet(argv.path)
 	)
 	.command(
-		"account",
-		"Fetch account information",
+		"balance",
+		"Get your current balance",
 		(yargs) =>
 			yargs.option("path", {
 				global: true,
@@ -29,6 +29,6 @@ yargs(hideBin(process.argv))
 				default: "wallet.json",
 				describe: "Wallet file path",
 			}),
-		(argv) => fetchAccount(argv.path)
+		(argv) => getBalance(argv.path)
 	)
 	.help().argv;
